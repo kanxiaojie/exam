@@ -4,7 +4,7 @@
             <h4>{{ $ifLinked }}学生</h4>
             <hr/>
 
-            <form method="post" action="/courses/{{ $id }}/{{ $action }}/{{ $ifLink }}" enctype="multipart/form-data">
+            <form method="post" action="/courses/{{ $id }}/{{ $action }}/{{ $ifLink }}">
                 {{ csrf_field() }}
 
                 <table id="{{ $my_table }}" class="table table-bordered text-center">

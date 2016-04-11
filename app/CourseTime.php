@@ -17,7 +17,7 @@ class CourseTime extends Model
 
     public function courses()
     {
-        return $this->belongsToMany('App\Course', 'courseCourseTime');
+        return $this->belongsToMany('App\Course', 'CourseCourseTime', 'course_id', 'course_times_id');
     }
 
     public function modules()

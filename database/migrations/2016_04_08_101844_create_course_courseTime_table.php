@@ -12,7 +12,7 @@ class CreateCourseCourseTimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('courseCourseTime', function (Blueprint $table) {
+        Schema::create('CourseCourseTime', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id')->unsigned()->index();
             $table->integer('course_time_id')->unsigned()->index();
