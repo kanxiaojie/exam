@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class CourseOthersController extends Controller
 {
@@ -76,11 +77,21 @@ class CourseOthersController extends Controller
                 $userLink = User::findOrFail($input);//取得对应的人
                 $userLink->delete();//删除对应的人
             }
-            $course->users()->detach($inputs);
+            $course->users()->attach($inputs);
             flash()->success('恭喜！', '取消关联成功！');
         }
 
         return back();
+    }
+
+    public function courseTimes($id)
+    {
+        $course = $this->base->getByCourseId($id);
+        $Ids = $course->courseTimes->lists('id');
+        $unCourseTimes = Auth::user()->courseTime()->whereNotIn('id', $Ids)->orderBy('name')->get();
+        $courseTimes = $course->courseTimes()->orderBy('name')->get();
+
+        return view('courses.others.linkCourseTimes', compact('unCourseTimes', 'courseTimes', 'course', 'id'));
     }
 
 //    public function delete($id)
