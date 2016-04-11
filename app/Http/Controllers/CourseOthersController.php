@@ -29,6 +29,60 @@ class CourseOthersController extends Controller
         return view('courses.others.linkStudents', compact('course', 'unStudents', 'students', 'id'));
     }
 
+    public function studentsLink(Request $request, $id)
+    {
+        $course = $this->base->getByCourseId($id);
+        $inputs = $request->input('person');
+
+        if(!$inputs == null)
+        {
+            $userId = [];
+
+            foreach($inputs as $input)
+            {
+                $userUnLink = User::findOrFail($input);
+                $studentIds = User::lists('student_id')->toArray();//所有的ID
+
+                if(!in_array($userUnLink->student_id, $studentIds))
+                {
+                    $user = new User();
+                    $user->student_id = $userUnLink->student_id;
+                    $user->name = $userUnLink->name;
+                    $user->role_id = 1;
+                    $user->password = bcrypt('123456');
+                    $user->save();
+                    $userId[] = $user->id;
+                }else{
+                    $userId[] = User::where('student_id', $userUnLink->student_id)->first()->id;
+                }
+            }
+
+            $course->users()->attach($userId);
+            flash()->success('恭喜! ', '关联成功');
+        }
+
+        return back();
+    }
+
+    public function studentsUnLink(Request $request, $id)
+    {
+        $course = $this->base->getByCourseId($id);
+        $inputs = $request->input('person');
+
+        if(! $inputs == null)
+        {
+            foreach($inputs as $input)
+            {
+                $userLink = User::findOrFail($input);//取得对应的人
+                $userLink->delete();//删除对应的人
+            }
+            $course->users()->detach($inputs);
+            flash()->success('恭喜！', '取消关联成功！');
+        }
+
+        return back();
+    }
+
 //    public function delete($id)
 //    {
 //        $course = $this->base->getByCourseId($id);
