@@ -3,7 +3,7 @@
 @section('content')
     <h3 class="text-center">课程信息</h3>
     <hr>
-    <div id="page-container">
+    <div id="page-container" style="padding-right: 200px">
         <div class="mainpanel">
             <div class="contentpanel">
                 <div class="panel-body">

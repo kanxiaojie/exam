@@ -14,14 +14,14 @@ class ModuleTest extends TestCase
     public function setBeforeEveryTest()
     {
         $this->teacher = factory(App\User::class)->create([
-            'student_id' => '2010012701',
+            'student_id' => '2010012700',
             'role_id'    => '2',
             'name'       => 'Mike',
             'password'   => bcrypt($this->password)
         ]);
 
         $this->module = factory(App\Module::class)->create([
-            'id' => 6,
+            'id' => 2,
             'name' => '汉语角',
             'description' => '学习汉语文化'
         ]);

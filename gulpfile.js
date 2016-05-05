@@ -20,24 +20,24 @@ elixir(function(mix) {
             //'libs/bootstrap.css',
             'libs/flexslider.css',
             'libs/prettyPhoto.css',
-            'libs/font-awesome.css',
+            //'libs/font-awesome.css',
             'libs/font-awesome-ie7.css',
-            'libs/style.css',
+            //'libs/style.css',
             'libs/blue.css',
-            'libs/buttons.css',
-            'libs/custom.css'
+            'libs/buttons.css'
+            //'libs/custom.css'
         ],'./public/css/libs.css')
         .scripts([
             '/libs/jquery-2.2.2.js',
-            '/libs/sweetalert-dev.js',
+            //'/libs/sweetalert-dev.js',
             'libs/select2.min.js',
             '/libs/jquery.dynatable.js',
             '/libs/bootstrap.js',
             'libs/jquery.flexslider-min.js',
-            'libs/jquery.isotope.js',
-            'libs/jquery.prettyPhoto.js',
-            '/libs/filter.js',
-            '/libs/custom.js'
+            //'libs/jquery.isotope.js',
+            //'libs/jquery.prettyPhoto.js',
+            '/libs/filter.js'
+            //'/libs/custom.js'
             //'/libs/icheck.js'
         ],'./public/js/libs.js');
 });

@@ -8,4 +8,12 @@
         <input type="hidden" name="_method" value="PUT">
         @include('partials.person.form', ['student_id' => $person->student_id, 'name' => $person->name])
     </form>
+
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+    @endif
 @stop

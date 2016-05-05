@@ -20,6 +20,6 @@ class Course extends Model
 
     public function exams()
     {
-        return $this->hasMany('App\Exam', 'courseExams');
+        return $this->belongsToMany('App\Exam', 'courseExams');
     }
 }

@@ -47,7 +47,8 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        Course::create($request->all());
+        $course = Course::create($request->all());
+        $course->users()->attach($request->input('user_id'));
 
         return redirect('/courses');
     }
@@ -70,7 +71,9 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = $this->base->getByCourseId($id);
-
+        $course->users()->detach();
+        $course->courseTimes()->detach();
+        $course->exams()->detach();
         $course->delete();
 
         return redirect('/courses');

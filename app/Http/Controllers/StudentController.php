@@ -48,7 +48,6 @@ class StudentController extends Controller
     public function update(Request $request, $student_id)
     {
         $student = $this->base->getByStudentId($student_id);
-
         $student->update($request->all());
 
         return redirect('/students');
@@ -57,7 +56,7 @@ class StudentController extends Controller
     public function destroy($student_id)
     {
         $student = $this->base->getByStudentId($student_id);
-
+        $student->courses()->detach();
         $student->delete();
 
         return back();

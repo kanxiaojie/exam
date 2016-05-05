@@ -1,13 +1,14 @@
 <?php
 
-Route::group(['middleware' => 'web'], function(){
+//Route::group(['middleware' => 'web'], function(){
+
+    Route::resource('test', 'TestController');
 
     Route::group(['middleware' => 'auth'], function(){
 
         Route::get('/', 'PagesController@home');
 
         Route::group(['middleware' => 'admin'], function() {
-
             Route::resource('teachers', 'TeacherController', ['except' => 'show']);
             Route::resource('students', 'StudentController', ['except' => 'show']);
         });
@@ -27,8 +28,8 @@ Route::group(['middleware' => 'web'], function(){
                 Route::post('linkStudents/unLink', 'CourseOthersController@studentsUnLink');
 
                 Route::get('linkCourseTimes', 'CourseOthersController@courseTimes');
-//                    Route::post('linkCourseTimes/link', 'CourseOthersController@courseTimesLink');
-//                    Route::post('linkCourseTimes/unLink', 'CourseOthersController@courseTimesUnLink');
+                Route::post('linkCourseTimes/link', 'CourseOthersController@courseTimesLink');
+                Route::post('linkCourseTimes/unLink', 'CourseOthersController@courseTimesUnLink');
 
             });
 
@@ -44,7 +45,7 @@ Route::group(['middleware' => 'web'], function(){
     });
 
     Route::auth();
-});
+//});
 
 
 

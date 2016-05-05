@@ -37,8 +37,8 @@ class ExamController extends Controller
 
     public function store(Request $request)
     {
-        $exams = Exam::create($request->all());
-        $exams->modules()->attach($request->input('modules'));
+        $exam = Exam::create($request->all());
+        $exam->modules()->attach($request->input('modules'));
 
         return redirect('/exams');
     }

@@ -120,9 +120,9 @@ class StudentTest extends TestCase
     }
 
     /**
-     *缺失信息时，则无法创建学生
+     *缺失学生姓名信息时，则无法创建学生
      */
-    public function test_admin_can_not_add_student_because_of_no_studentId()
+    public function test_admin_can_not_add_student_because_of_no_name()
     {
         $this->test_admin_login();
 
@@ -135,9 +135,24 @@ class StudentTest extends TestCase
     }
 
     /**
+     *缺失学生学号信息时，则无法创建学生
+     */
+    public function test_admin_can_not_add_student_because_of_no_studentId()
+    {
+        $this->test_admin_login();
+
+        $this->visit('/students/create')
+            ->see('确定')
+            ->type('Jack', 'name')
+            ->press('确定')
+            ->seePageIs('/students')//此处会得到一个错误提示, 即看到的界面仍然是创建页面，因为缺少填写的信息
+        ;
+    }
+
+    /**
      *管理员可以修改学生信息
      */
-    public function test_admin_could_edit_student_info()
+    public function test_admin_can_edit_student_info()
     {
         $this->test_admin_login();
 

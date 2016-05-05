@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DatabaseTest extends TestCase
 {
+    /**
+     *数据库测试
+     */
     public function test_database_users()
     {
         $this->seeInDatabase('users', ['student_id' => 'admin']);

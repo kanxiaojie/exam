@@ -3,6 +3,7 @@
 @section('content')
     <h3>课程管理</h3>
     <hr/>
+
     <div class="text-right" style="margin-bottom: 20px">
         <a href="/courses/create" class="button button-border button-rounded button-primary">添加新课程</a>
     </div>

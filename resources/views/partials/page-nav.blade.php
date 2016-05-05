@@ -53,3 +53,17 @@
         </nav>
     </div>
 </div>
+
+@section('scripts')
+    <script>
+        var getElementNavPath = location.pathname.split("/");
+        getElementNavPathName = getElementNavPath[1];
+        var examNavbarDict = ['teachers', 'students', 'courses', 'courseTimes', 'modules', 'exams', 'studentsCourses', 'login', 'register' ];
+
+        $(document).ready(function(){
+            if(examNavbarDict.indexOf(getElementNavPathName) >= 0){
+                $("#" + getElementNavPathName + "Nav").addClass("active");
+            }
+        });
+    </script>
+@endsection

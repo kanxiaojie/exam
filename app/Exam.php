@@ -22,6 +22,6 @@ class Exam extends Model
 
     public function modules()
     {
-        return $this->belongsToMany('App\Exam', 'examModule');
+        return $this->belongsToMany('App\Module', 'examModule');
     }
 }

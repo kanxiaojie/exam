@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\TeacherRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Repositories\BaseRepository;
@@ -30,7 +31,7 @@ class TeacherController extends Controller
         return view('teachers.create');
     }
 
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
         User::create($request->all());
 
@@ -44,7 +45,7 @@ class TeacherController extends Controller
         return view('teachers.edit', compact('teacher'));
     }
 
-    public function update(Request $request, $student_id)
+    public function update(TeacherRequest $request, $student_id)
     {
         $teacher = $this->base->getByStudentId($student_id);
         $teacher->update($request->all());
@@ -55,7 +56,7 @@ class TeacherController extends Controller
     public function destroy($student_id)
     {
         $teacher = $this->base->getByStudentId($student_id);
-
+        $teacher->courses()->detach();
         $teacher->delete();
 
         return back();

@@ -14,7 +14,7 @@ class ExamTest extends TestCase
     public function setBeforeEveryTest()
     {
         $this->teacher = factory(App\User::class)->create([
-            'student_id' => '2010012701',
+            'student_id' => '2010012700',
             'role_id'    => '2',
             'name'       => 'Mike',
             'password'   => bcrypt($this->password)
@@ -77,6 +77,7 @@ class ExamTest extends TestCase
 
     /**
      *删除考试
+     * 在进行删除功能测试时，验证权限再进行删除.还要验证不成功删除的情况
      */
     public function test_a_teacher_can_delete_exams()
     {

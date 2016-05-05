@@ -15,7 +15,6 @@ class User extends Authenticatable
         'student_id','role_id','name', 'password',
     ];
 
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,7 +36,7 @@ class User extends Authenticatable
 
     public function courseTime()
     {
-        return $this->hasOne('App\CourseTime');
+        return $this->hasMany('App\CourseTime');
     }
 
     public function module()

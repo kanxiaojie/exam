@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithPages;
 
+/**
+ * 测试管理员对教师的管理
+ */
 class TeacherTest extends TestCase
 {
     use DatabaseTransactions;
@@ -51,6 +54,23 @@ class TeacherTest extends TestCase
     }
 
     /**
+     *查看添加的老师信息
+     */
+    public function test_if_user_is_admin_can_see_teacher_exact_info()
+    {
+        $this->visit('/login');
+        $this->type($this->user->student_id, 'student_id');
+        $this->type('123456', 'password');
+        $this->press('登录');
+        $this->seePageIs('/');
+
+        $this->visit('/teachers');
+
+        $this->assertEquals('2010012708', $this->teacher->student_id);
+        $this->assertEquals('Lucy', $this->teacher->name);
+    }
+
+    /**
      *未以管理员身份登录时则无法看到相应视图
      */
     public function test_if_not_a_admin_or_cannot_see_teacher_info()
@@ -87,6 +107,7 @@ class TeacherTest extends TestCase
 
     /**
      *不填写教师工号，管理员则无法创建教师（不填写姓名相同）
+     * 还可以写出学号如果一样抛出的错误
      */
     public function test_admin_could_not_add_teachers_because_of_no_studentId()
     {
@@ -100,7 +121,7 @@ class TeacherTest extends TestCase
             ->see('确定')
             ->type('Jack', 'name')
             ->press('确定')
-            ->see('')
+            ->see('The student id field is required.')
         ;
     }
 
@@ -156,7 +177,7 @@ class TeacherTest extends TestCase
     /**
      *登录人员才可以看到相关标题栏内容
      */
-    public function test_when_login_someone_can_see_text()
+    public function test_when_login_admin_can_see_teachers_title()
     {
         $this->visit('/login')
             ->type($this->user->student_id, 'student_id')
@@ -172,27 +193,6 @@ class TeacherTest extends TestCase
             ->see('操作')
         ;
     }
-
-    /**
-     *插件做成搜索框
-     */
-    public function test_search()
-    {
-        $this->visit('/login')
-            ->type($this->user->student_id, 'student_id')
-            ->type('123456', 'password')
-            ->press('登录')
-            ->seePageIs('/');
-
-        $this->visit('/teachers');
-    }
-
-
-
-
-
-
-
 
 
 

@@ -6,15 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
+    public function test_simple_mocks()
     {
-        $this->visit('/')
-             ->see('');
+        $user = Mockery::mock(['getName' => 'Jack']);
+        $user->getName();
     }
-
 }

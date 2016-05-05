@@ -16,7 +16,7 @@ class CourseTimeTest extends TestCase
     public function setBeforeEveryTest()
     {
         $this->teacher = factory(App\User::class)->create([
-            'student_id' => '2010012701',
+            'student_id' => '2010012700',
             'role_id'    => '2',
             'name'       => 'Mike',
             'password'   => bcrypt($this->password)
@@ -70,7 +70,7 @@ class CourseTimeTest extends TestCase
 
         $this->visit('/courseTimes')
             ->click('编辑')
-            ->seePageIs('/courseTimes/26/edit')
+            ->seePageIs('/courseTimes/1/edit')
         ;
     }
 

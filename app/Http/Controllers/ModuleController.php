@@ -60,9 +60,10 @@ class ModuleController extends Controller
 
     public function destroy($id)
     {
-        $course = $this->base->getByModuleId($id);
-
-        $course->delete();
+        $module = $this->base->getByModuleId($id);
+        $module->courseTimes()->detach();
+        $module->exams()->detach();
+        $module->delete();
 
         return back();
     }
